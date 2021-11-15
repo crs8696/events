@@ -1,0 +1,93 @@
+<% was_validated = user.errors.any? %>
+
+<%= form_with(model: user, local: true, novalidate: true, class: "mb-3") do |f| %>
+  <div class="form-group">
+    <% name_class = "form-control" %>
+    <% name_was_invalid = user.errors.include?(:name) %>
+
+    <% if was_validated %>
+      <% if name_was_invalid %>
+        <% name_class << " is-invalid" %>
+      <% else %>
+        <% name_class << " is-valid" %>
+      <% end %>
+    <% end %>
+
+    <%= f.label :name %>
+    <%= f.number_field :name, class: name_class, placeholder: "Enter name" %>
+    <% if name_was_invalid %>
+      <% user.errors.full_messages_for(:name).each do |message| %>
+        <div class="invalid-feedback d-flex">
+          <%= message %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="form-group">
+    <% hosted_event_class = "form-control" %>
+    <% hosted_event_was_invalid = user.errors.include?(:hosted_event) %>
+
+    <% if was_validated %>
+      <% if hosted_event_was_invalid %>
+        <% hosted_event_class << " is-invalid" %>
+      <% else %>
+        <% hosted_event_class << " is-valid" %>
+      <% end %>
+    <% end %>
+
+    <%= f.label :hosted_events %>
+    <%= f.number_field :hosted_events, class: hosted_event_class, placeholder: "Enter hosted event" %>
+    <% if hosted_event_was_invalid %>
+      <% user.errors.full_messages_for(:hosted_event).each do |message| %>
+        <div class="invalid-feedback d-flex">
+          <%= message %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="form-group">
+    <% interested_event_class = "form-control" %>
+    <% interested_event_was_invalid = user.errors.include?(:interested_event) %>
+
+    <% if was_validated %>
+      <% if interested_event_was_invalid %>
+        <% interested_event_class << " is-invalid" %>
+      <% else %>
+        <% interested_event_class << " is-valid" %>
+      <% end %>
+    <% end %>
+
+    <%= f.label :interested_events %>
+    <%= f.number_field :interested_events, class: interested_event_class, placeholder: "Enter interested event" %>
+    <% if interested_event_was_invalid %>
+      <% user.errors.full_messages_for(:interested_event).each do |message| %>
+        <div class="invalid-feedback d-flex">
+          <%= message %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="form-group">
+    <% password_class = "form-control" %>
+    <% password_was_invalid = user.errors.include?(:password) %>
+
+    <% if was_validated %>
+      <% if password_was_invalid %>
+        <% password_class << " is-invalid" %>
+      <% else %>
+        <% password_class << " is-valid" %>
+      <% end %>
+    <% end %>
+
+    <%= f.label :password %>
+    <%= f.text_field :password, class: password_class, placeholder: "Enter password" %>
+    <% if password_was_invalid %>
+      <% user.errors.full_messages_for(:password).each do |message| %>
+        <div class="invalid-feedback d-flex">
+          <%= message %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+  <%= f.button class: "btn btn-outline-secondary btn-block" %>
+<% end %>

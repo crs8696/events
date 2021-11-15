@@ -1,0 +1,154 @@
+<%= search_form_for @q, :class => collapse_search_form, :id => "users_filters" do |f| %>
+  <p class="lead">Narrow results:</p>
+
+  <div class="form-group">
+    <%= f.label :name, "Name" %>
+    <div class="row">
+      <div class='col-md-6 mb-1'>
+        <%= f.text_field :name_gteq, :class => "form-control", :placeholder => "Name greater than or equal to" %>
+      </div>
+      <div class='col-md-6'>
+        <%= f.text_field :name_lteq, :class => "form-control", :placeholder => "Name less than or equal to" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :interested_events, "Interested events" %>
+    <div class="row">
+      <div class='col-md-6 mb-1'>
+        <%= f.text_field :interested_events_gteq, :class => "form-control", :placeholder => "Interested events greater than or equal to" %>
+      </div>
+      <div class='col-md-6'>
+        <%= f.text_field :interested_events_lteq, :class => "form-control", :placeholder => "Interested events less than or equal to" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :hosted_events, "Hosted events" %>
+    <div class="row">
+      <div class='col-md-6 mb-1'>
+        <%= f.text_field :hosted_events_gteq, :class => "form-control", :placeholder => "Hosted events greater than or equal to" %>
+      </div>
+      <div class='col-md-6'>
+        <%= f.text_field :hosted_events_lteq, :class => "form-control", :placeholder => "Hosted events less than or equal to" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :created_at, "Created at" %>
+    <div class="row">
+      <div class='col-md-6 mb-1'>
+        <div class='input-group date' id='created_atgteqPicker' data-target-input="nearest">
+          <%= f.text_field :created_at_gteq, :class => "form-control datetimepicker-input", :placeholder => "Created at greater than or equal to", :data => {:target => '#created_atgteqPicker'} %>
+          <div class="input-group-append" data-target='#created_atgteqPicker' data-toggle="datetimepicker">
+            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+          </div>
+        </div>
+      </div>
+
+      <div class='col-md-6'>
+        <div class='input-group date' id='created_atlteqPicker' data-target-input="nearest">
+          <%= f.text_field :created_at_lteq, :class => "form-control datetimepicker-input", :placeholder => "Created at less than or equal to", :data => {:target => '#created_atlteqPicker'} %>
+          <div class="input-group-append" data-target='#created_atlteqPicker' data-toggle="datetimepicker">
+            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript">
+      $(function () {
+          $('#created_atgteqPicker').datetimepicker({
+              format: 'YYYY-MM-DD hh:mm:SS'
+          });
+          $('#created_atlteqPicker').datetimepicker({
+              useCurrent: false,
+              format: 'YYYY-MM-DD hh:mm:SS'
+          });
+          $('#created_atgteqPicker').on("dp.change", function (e) {
+              $('#created_atlteqPicker').data("DateTimePicker").minDate(e.date);
+          });
+          $('#created_atlteqPicker').on("dp.change", function (e) {
+              $('#created_atgteqPicker').data("DateTimePicker").maxDate(e.date);
+          });
+      });
+  </script>
+
+
+  <div class="form-group">
+    <%= f.label :date, "Event Date" %>
+    <div class="row">
+      <div class='col-md-6 mb-1'>
+        <div class='input-group date' id='eventsgteqdatePicker' data-target-input="nearest">
+          <%= f.text_field :events_date_gteq, :class => "form-control datetimepicker-input", :placeholder => "Event Date greater than or equal to", :data => {:target => '#eventsgteqdatePicker'} %>
+          <div class="input-group-append" data-target='#eventsgteqdatePicker' data-toggle="datetimepicker">
+            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+          </div>
+        </div>
+      </div>
+
+      <div class='col-md-6'>
+        <div class='input-group date' id='eventslteqdatePicker' data-target-input="nearest">
+          <%= f.text_field :events_date_lteq, :class => "form-control datetimepicker-input", :placeholder => "Event Date less than or equal to", :data => {:target => '#eventslteqdatePicker'} %>
+          <div class="input-group-append" data-target='#eventslteqdatePicker' data-toggle="datetimepicker">
+            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript">
+      $(function () {
+          $('#eventsgteqdatePicker').datetimepicker({
+              format: 'MM/DD/YYYY'
+          });
+          $('#eventslteqdatePicker').datetimepicker({
+              useCurrent: false,
+              format: 'MM/DD/YYYY'
+          });
+          $('#eventsgteqdatePicker').on("dp.change", function (e) {
+              $('#eventslteqdatePicker').data("DateTimePicker").minDate(e.date);
+          });
+          $('#eventslteqdatePicker').on("dp.change", function (e) {
+              $('#eventsgteqdatePicker').data("DateTimePicker").maxDate(e.date);
+          });
+      });
+  </script>
+
+  <div class="form-group">
+    <%= f.label :response, "Rsvp Response" %>
+    <div class="row">
+      <div class='col-md-6 mb-1'>
+        <%= f.text_field :rsvps_response_gteq, :class => "form-control", :placeholder => "Rsvp Response greater than or equal to" %>
+      </div>
+      <div class='col-md-6'>
+        <%= f.text_field :rsvps_response_lteq, :class => "form-control", :placeholder => "Rsvp Response less than or equal to" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :user_id, "Comment User" %>
+    <div class="row">
+      <div class='col-md-6 mb-1'>
+        <%= f.text_field :comments_user_id_gteq, :class => "form-control", :placeholder => "Comment User greater than or equal to" %>
+      </div>
+      <div class='col-md-6'>
+        <%= f.text_field :comments_user_id_lteq, :class => "form-control", :placeholder => "Comment User less than or equal to" %>
+      </div>
+    </div>
+  </div>
+
+
+  <%= f.submit :class => "btn btn-primary btn-block mb-1" %>
+
+  <a href="/users" class="btn btn-outline-secondary btn-block mb-1">Clear filters</a>
+
+<% end %>
+
+<a class="btn btn-outline-secondary btn-block mb-1" data-toggle="collapse" href="#users_filters">
+  Show filters
+</a>

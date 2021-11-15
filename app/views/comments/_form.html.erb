@@ -1,0 +1,71 @@
+<% was_validated = comment.errors.any? %>
+
+<%= form_with(model: comment, local: true, novalidate: true, class: "mb-3") do |f| %>
+  <div class="form-group">
+    <% user_class = "form-control" %>
+    <% user_was_invalid = comment.errors.include?(:user) %>
+
+    <% if was_validated %>
+      <% if user_was_invalid %>
+        <% user_class << " is-invalid" %>
+      <% else %>
+        <% user_class << " is-valid" %>
+      <% end %>
+    <% end %>
+
+    <%= f.label :user_id %>
+    <%= f.number_field :user_id, class: user_class, placeholder: "Enter user" %>
+    <% if user_was_invalid %>
+      <% comment.errors.full_messages_for(:user).each do |message| %>
+        <div class="invalid-feedback d-flex">
+          <%= message %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="form-group">
+    <% comment_detail_class = "form-control" %>
+    <% comment_detail_was_invalid = comment.errors.include?(:comment_detail) %>
+
+    <% if was_validated %>
+      <% if comment_detail_was_invalid %>
+        <% comment_detail_class << " is-invalid" %>
+      <% else %>
+        <% comment_detail_class << " is-valid" %>
+      <% end %>
+    <% end %>
+
+    <%= f.label :comment_details %>
+    <%= f.number_field :comment_details, class: comment_detail_class, placeholder: "Enter comment detail" %>
+    <% if comment_detail_was_invalid %>
+      <% comment.errors.full_messages_for(:comment_detail).each do |message| %>
+        <div class="invalid-feedback d-flex">
+          <%= message %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="form-group">
+    <% event_class = "form-control" %>
+    <% event_was_invalid = comment.errors.include?(:event) %>
+
+    <% if was_validated %>
+      <% if event_was_invalid %>
+        <% event_class << " is-invalid" %>
+      <% else %>
+        <% event_class << " is-valid" %>
+      <% end %>
+    <% end %>
+
+    <%= f.label :event_id %>
+    <%= f.collection_select :event_id, Event.all, :id, :to_s, {}, class: "form-control" %>
+    <% if event_was_invalid %>
+      <% comment.errors.full_messages_for(:event).each do |message| %>
+        <div class="invalid-feedback d-flex">
+          <%= message %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+  <%= f.button class: "btn btn-outline-secondary btn-block" %>
+<% end %>
